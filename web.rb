@@ -46,8 +46,7 @@ end
 get '/bloat' do
   "woah"
   y = `cat text.txt`
-  x = rand()
   1000.times do |n|
-    big_array << y + x.to_s + n.to_s
+    big_array << y + rand().to_s + n.to_s
   end
 end
