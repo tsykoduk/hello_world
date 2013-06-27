@@ -2,6 +2,8 @@
 require 'rubygems'
 require 'sinatra'
 
+big_array = []
+
 helpers do
           def protected!
             unless ENV['RACK_ENV'] != 'staging' || authorized?
@@ -24,7 +26,6 @@ end
 get '/protected' do
   protected!
   "Hi there, Mr Secure User Named " #<< ENV['NAME']
-  
 end
 
 get '/slow' do
@@ -33,3 +34,9 @@ get '/slow' do
         "Hello, " #<< ENV['NAME']
 end
 
+get '/bloat' do
+  "woah"
+  100.times do |n|
+    big_array << n + rand()
+  end
+end
