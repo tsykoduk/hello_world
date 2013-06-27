@@ -29,9 +29,18 @@ get '/protected' do
 end
 
 get '/slow' do
-        protected!
+    protected!
 		sleep(2)
         "Hello, " #<< ENV['NAME']
+end
+
+get '/rand-slow' do
+  #protected!
+  if rand() > 0.75
+    sleep(10 * rand())
+  else
+    sleep(1 * rand())
+  end
 end
 
 get '/bloat' do
