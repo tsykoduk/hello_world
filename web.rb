@@ -20,18 +20,18 @@ helpers do
       end
 
 get '/' do
-    "Hello, "  #<< ENV['NAME']
+    "Hello, "  << ENV['NAME']
 end 
 
 get '/protected' do
   protected!
-  "Hi there, Mr Secure User Named " #<< ENV['NAME']
+  "Hi there, Mr Secure User Named " << ENV['NAME']
 end
 
 get '/slow' do
     protected!
 		sleep(2)
-        "Hello, " #<< ENV['NAME']
+        "Hello, " << ENV['NAME']
 end
 
 get '/rand-slow' do
