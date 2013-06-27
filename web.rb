@@ -36,7 +36,7 @@ end
 
 get '/bloat' do
   "woah"
-  100.times do |n|
+  10000.times do |n|
     big_array << n + rand()
   end
 end
