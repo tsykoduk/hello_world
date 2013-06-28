@@ -29,7 +29,7 @@ get '/protected' do
 end
 
 get '/slow' do
-    protected!
+    #protected!
 		sleep(2)
         "Hello, " << ENV['NAME']
 end
