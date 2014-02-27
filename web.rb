@@ -50,10 +50,9 @@ get '/rand-slow' do
 end
 
 get '/bloat' do
-  "woah"
   y = `cat text.txt`
   1000.times do |n|
     big_array << y + rand().to_s + n.to_s
   end
-  "Hello, " << ENV['NAME'] << "! This should use a lot of RAM"
+  "<p>woah</p><p>Hello, " << ENV['NAME'] << "! This should use a lot of RAM </p>"
 end
