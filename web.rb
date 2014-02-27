@@ -11,17 +11,22 @@ helpers do
                     throw(:halt, [401, "Not authorized\n"])
             end
           end
-        
+
           def authorized?
             @auth ||=  Rack::Auth::Basic::Request.new(request.env)
-            @auth.provided? && @auth.basic? && @auth.credentials && 
+            @auth.provided? && @auth.basic? && @auth.credentials &&
             @auth.credentials == ['alladin', 'opensesame']
           end
       end
 
 get '/' do
-    "Hello, "  << ENV['NAME']
-end 
+    "<p>Hello, "  << ENV['NAME'] << "!</p>" <<
+    "<p>What would you like to do today?</p>" <<
+    "<ul><li><a href='/protected'>Access a secure page?</a></li>"<<
+    "<li><a href='/slow'>Load a slow page?</a></li>"<<
+    "<li><a href='/rand-slow'>Load a randomly slow page</a></li>"<<
+    "<li><a href='/bloat'>Load a page that will leak ram</a></li></ul>"
+end
 
 get '/protected' do
   protected!
@@ -31,7 +36,7 @@ end
 get '/slow' do
     #protected!
 		sleep(2)
-        "Hello, " << ENV['NAME']
+        "Hello, " << ENV['NAME'] << "! This is a slow request"
 end
 
 get '/rand-slow' do
@@ -41,6 +46,7 @@ get '/rand-slow' do
   else
     sleep(1 * rand())
   end
+  "Hello, " << ENV['NAME'] << "! This is a randomly slow request"
 end
 
 get '/bloat' do
@@ -49,4 +55,5 @@ get '/bloat' do
   1000.times do |n|
     big_array << y + rand().to_s + n.to_s
   end
+  "Hello, " << ENV['NAME'] << "! This should use a lot of RAM"
 end
